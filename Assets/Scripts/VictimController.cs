@@ -12,6 +12,7 @@ namespace HARROP_CHARLIE.RandomTheft
         private void Awake()
         {
             rb2D = GetComponent<Rigidbody2D>();
+            rotationSpeed = Random.Range(-80, -180);
         }
 
         private void FixedUpdate()
