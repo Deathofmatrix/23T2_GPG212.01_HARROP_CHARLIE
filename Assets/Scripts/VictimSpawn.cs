@@ -11,9 +11,19 @@ namespace HARROP_CHARLIE.RandomTheft
         [SerializeField] private float screenWidth;
         [SerializeField] private float screenHeight;
 
+        [SerializeField] private float sideScreenBufferTop;
+        [SerializeField] private float sideScreenBuffer;
+
         [SerializeField] private GameObject victim;
 
         [SerializeField] float minDistanceFromCenter;
+
+        [SerializeField] private float collisionRadius;
+        private Collider2D[] overlappingColliders;
+
+        public StealableItemList itemList;
+
+        [SerializeField] private int enemyToSpawn;
 
         private void Start()
         {
@@ -21,7 +31,7 @@ namespace HARROP_CHARLIE.RandomTheft
             
             CalculateScreenSize();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < enemyToSpawn; i++)
             {
                 SpawnVictim(RandomPosition());
             }
@@ -40,20 +50,43 @@ namespace HARROP_CHARLIE.RandomTheft
         private Vector3 RandomPosition()
         {
             Vector2 position;
+
+            bool isValidPosition = false;
             do
             {
-                float randomX = Random.Range(-screenWidth / 2f, screenWidth / 2f);
-                float randomY = Random.Range(-screenHeight / 2f, screenHeight / 2f);
+                float randomX = Random.Range((-screenWidth / 2f) + sideScreenBuffer, (screenWidth / 2f) - sideScreenBuffer);
+                float randomY = Random.Range((-screenHeight / 2f) + sideScreenBuffer, (screenHeight / 2f) - sideScreenBufferTop);
 
                 position = new Vector2(randomX, randomY);
-            } while (Vector2.Distance(position, new Vector2(0,0)) < minDistanceFromCenter);
+
+                isValidPosition = !CheckCollision(position);
+
+            } while (Vector2.Distance(position, new Vector2(0,0)) < minDistanceFromCenter || !isValidPosition);
 
             return position;
         }
 
+        private bool CheckCollision(Vector2 position)
+        {
+            overlappingColliders = Physics2D.OverlapCircleAll(position, collisionRadius);
+
+            foreach (Collider2D collider in overlappingColliders)
+            {
+                if (collider.CompareTag("Victim"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
         private void SpawnVictim(Vector3 randomSpawnPosition)
         {
             GameObject lastSpawnedVictim = Instantiate(victim, randomSpawnPosition, Quaternion.identity);
+            lastSpawnedVictim.GetComponent<VictimController>().currentItem = itemList.items[Random.Range(0, itemList.items.Count)];
+            
         }
     }
 }
