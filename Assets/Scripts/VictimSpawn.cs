@@ -27,12 +27,22 @@ namespace HARROP_CHARLIE.RandomTheft
 
         private void Start()
         {
+            //foreach (Item item in ItemChoiceManager.itemsToSteal)
+            //{
+            //    Debug.Log(item.itemName);
+            //}
+
             mainCamera = Camera.main;
             
             CalculateScreenSize();
 
             for (int i = 0; i < enemyToSpawn; i++)
             {
+                if (ItemChoiceManager.itemsToSteal.Count > i)
+                {
+                    SpawnVictimFromList(RandomPosition(), i);
+                    continue;
+                }
                 SpawnVictim(RandomPosition());
             }
         }
@@ -86,7 +96,12 @@ namespace HARROP_CHARLIE.RandomTheft
         {
             GameObject lastSpawnedVictim = Instantiate(victim, randomSpawnPosition, Quaternion.identity);
             lastSpawnedVictim.GetComponent<VictimController>().currentItem = itemList.items[Random.Range(0, itemList.items.Count)];
-            
+        }
+
+        private void SpawnVictimFromList(Vector3 randomSpawnPosition, int numberInList)
+        {
+            GameObject lastSpawnedVictim = Instantiate(victim, randomSpawnPosition, Quaternion.identity);
+            lastSpawnedVictim.GetComponent<VictimController>().currentItem = ItemChoiceManager.itemsToSteal[numberInList];
         }
     }
 }
