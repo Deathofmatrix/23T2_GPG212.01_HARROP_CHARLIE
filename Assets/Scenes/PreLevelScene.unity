@@ -500,6 +500,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2fbe4ebdb509714db861d15e256f214, type: 3}
+--- !u!1001 &852366943
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224255953441965650, guid: f5b6aed9afdf03146a65d90fb39d831b, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224255953441965650, guid: f5b6aed9afdf03146a65d90fb39d831b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224255953441965650, guid: f5b6aed9afdf03146a65d90fb39d831b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224255953441965650, guid: f5b6aed9afdf03146a65d90fb39d831b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224255953441965660, guid: f5b6aed9afdf03146a65d90fb39d831b, type: 3}
+      propertyPath: m_Name
+      value: Game Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f5b6aed9afdf03146a65d90fb39d831b, type: 3}
 --- !u!1 &908973763
 GameObject:
   m_ObjectHideFlags: 0

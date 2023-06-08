@@ -16,16 +16,19 @@ namespace HARROP_CHARLIE.RandomTheft
         [SerializeField] private GameObject itemPanel;
         [SerializeField] private GameObject itemImagePrefab;
 
+        private void Awake()
+        {
+            numberOftemsToSteal = LevelManager.currentLevel + 2;
+        }
+
         private void Start()
         {
             itemsToSteal.Clear();
             PickRandomItems();
+
             foreach (Item item in itemsToSteal)
             {
                 Debug.Log(item.itemName);
-            }
-            foreach (Item item in itemsToSteal)
-            {
                 GameObject currentItemImage = Instantiate(itemImagePrefab, itemPanel.transform);
                 currentItemImage.GetComponent<Image>().sprite = item.image;
             }
