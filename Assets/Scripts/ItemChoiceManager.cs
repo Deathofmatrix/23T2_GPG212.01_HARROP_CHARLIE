@@ -16,13 +16,11 @@ namespace HARROP_CHARLIE.RandomTheft
         [SerializeField] private GameObject itemPanel;
         [SerializeField] private GameObject itemImagePrefab;
 
-        private void Awake()
-        {
-            numberOftemsToSteal = LevelManager.currentLevel + 2;
-        }
 
         private void Start()
         {
+            numberOftemsToSteal = LevelManager.currentLevel + 2;
+
             itemsToSteal.Clear();
             PickRandomItems();
 

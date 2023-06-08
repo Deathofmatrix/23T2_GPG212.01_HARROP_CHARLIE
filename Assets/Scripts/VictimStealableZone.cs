@@ -29,7 +29,7 @@ namespace HARROP_CHARLIE.RandomTheft
                 if (steal.action.ReadValue<float>() == 1)
                 {
                     Debug.Log("Steal Item");
-                    slider.value += 0.01f;
+                    slider.value += 0.015f;
                 }
             }
         }
@@ -40,7 +40,7 @@ namespace HARROP_CHARLIE.RandomTheft
             {
                 fill.GetComponent<Image>().color = Color.green;
                 //figure out how to check collecting in order
-                levelManager.CollectItem();
+                levelManager.CollectItem(transform.parent.name);
             }
         }
     }

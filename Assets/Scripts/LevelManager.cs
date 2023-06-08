@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,8 +9,11 @@ namespace HARROP_CHARLIE.RandomTheft
     public class LevelManager : MonoBehaviour
     {
         public static int currentLevel = 0;
+        public  int currentLevelPublic;
 
         public int itemsCollected;
+
+        [SerializeField] private int currentItemStealing;
 
         private void Start()
         {
@@ -23,17 +27,27 @@ namespace HARROP_CHARLIE.RandomTheft
 
         private void Update()
         {
+            currentLevelPublic = currentLevel;
+
             if (itemsCollected == currentLevel + 2)
             {
                 SceneManager.LoadScene(1);
             }
         }
 
-        public void CollectItem()
+        public void CollectItem(string itemName)
         {
-            itemsCollected++;
+            if (itemName == ItemChoiceManager.itemsToSteal[currentItemStealing].itemName)
+            {
+                itemsCollected++;
+                currentItemStealing++;
+            }
+            else
+            {
+                SceneManager.LoadScene(0);
+                Debug.Log("wrong item");
+            }
         }
-
     }
 }
 

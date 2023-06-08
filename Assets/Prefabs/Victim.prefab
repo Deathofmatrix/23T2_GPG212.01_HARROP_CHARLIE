@@ -428,7 +428,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.5, y: 1}
+  m_Size: {x: 2, y: 1}
   m_Direction: 0
 --- !u!114 &4379403262522087332
 MonoBehaviour:
@@ -445,6 +445,7 @@ MonoBehaviour:
   steal: {fileID: 9010386841123173781, guid: 284d766f7a1d19849af4885235974511, type: 3}
   stealSlider: {fileID: 4357503445931958711}
   fill: {fileID: 8706870035442021360}
+  levelManager: {fileID: 0}
 --- !u!1 &6777777984015424943
 GameObject:
   m_ObjectHideFlags: 0

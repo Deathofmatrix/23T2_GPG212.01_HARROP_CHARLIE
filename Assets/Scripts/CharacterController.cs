@@ -8,6 +8,7 @@ namespace HARROP_CHARLIE.RandomTheft
     public class CharacterController : MonoBehaviour
     {
         [SerializeField] private InputActionReference move;
+
         private Vector2 moveInput;
         [SerializeField] private float moveSpeed;
 
@@ -16,11 +17,6 @@ namespace HARROP_CHARLIE.RandomTheft
         private void Awake()
         {
             rb2D = GetComponent<Rigidbody2D>();
-        }
-
-        void Start()
-        {
-
         }
 
         void Update()
