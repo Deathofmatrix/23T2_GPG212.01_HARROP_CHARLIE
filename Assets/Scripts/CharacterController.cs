@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,7 @@ namespace HARROP_CHARLIE.RandomTheft
 {
     public class CharacterController : MonoBehaviour
     {
-        [SerializeField] private InputActionReference move;
+        [SerializeField] private InputActionReference move, fire;
 
         private Vector2 moveInput;
         [SerializeField] private float moveSpeed;
@@ -22,6 +23,11 @@ namespace HARROP_CHARLIE.RandomTheft
         void Update()
         {
             moveInput = move.action.ReadValue<Vector2>();
+
+            /*if (fire.action.ReadValue<float>() == 1)
+            {
+                SaveLoadSystem.Load();
+            }*/
         }
 
         private void FixedUpdate()

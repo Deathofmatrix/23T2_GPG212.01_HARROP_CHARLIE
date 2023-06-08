@@ -23,6 +23,8 @@ namespace HARROP_CHARLIE.RandomTheft
             {
                 currentLevel += 1;
             }
+
+            SaveLoadSystem.Save();
         }
 
         private void Update()
