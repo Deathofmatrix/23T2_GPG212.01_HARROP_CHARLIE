@@ -8,7 +8,7 @@ namespace HARROP_CHARLIE.RandomTheft
 {
     public class CharacterController : MonoBehaviour
     {
-        [SerializeField] private InputActionReference move, fire;
+        [SerializeField] private InputActionReference move;
 
         private Vector2 moveInput;
         [SerializeField] private float moveSpeed;

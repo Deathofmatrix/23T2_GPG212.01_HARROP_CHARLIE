@@ -1,3 +1,4 @@
+using EasyAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,9 @@ namespace HARROP_CHARLIE.RandomTheft
             if (collision.gameObject.CompareTag("Player"))
             {
                 Debug.Log("The player has been spotted by " + name);
+                FindObjectOfType<AudioManager>().Play("LoseSound");
                 SceneManager.LoadScene(0);
+                SaveLoadSystem.ClearPrefs();
             }
         }
     }

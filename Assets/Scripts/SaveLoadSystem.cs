@@ -7,6 +7,9 @@ namespace HARROP_CHARLIE.RandomTheft
     public class SaveLoadSystem : MonoBehaviour
     {
 
+        [SerializeField] private int levelToLoad;
+        [SerializeField] private bool loadLevelDev;
+
         public static void Save()
         {
             PlayerPrefs.SetInt("Current Level", LevelManager.currentLevel - 1);
@@ -22,6 +25,14 @@ namespace HARROP_CHARLIE.RandomTheft
         {
             PlayerPrefs.DeleteKey("Current Level");
             LevelManager.currentLevel = 0;
+        }
+
+        private void Update()
+        {
+            if (loadLevelDev == true)
+            {
+                PlayerPrefs.SetInt("Current Level", levelToLoad);
+            }
         }
     }
 }

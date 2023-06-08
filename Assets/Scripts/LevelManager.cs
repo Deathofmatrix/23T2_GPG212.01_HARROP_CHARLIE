@@ -1,6 +1,8 @@
+using EasyAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +15,9 @@ namespace HARROP_CHARLIE.RandomTheft
 
         public int itemsCollected;
 
-        [SerializeField] private int currentItemStealing;
+        [SerializeField] private int currentItemStealingIndex;
+
+        [SerializeField] private TextMeshProUGUI tmpUGUI;
 
         private void Start()
         {
@@ -33,22 +37,43 @@ namespace HARROP_CHARLIE.RandomTheft
 
             if (itemsCollected == currentLevel + 2)
             {
-                SceneManager.LoadScene(1);
+                if (itemsCollected < 10)
+                {
+                    SceneManager.LoadScene(1);
+
+                }
+                else
+                {
+                    SceneManager.LoadScene(4);
+                }
+            }
+
+            if (SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                DisplayItemsLeft();
             }
         }
 
         public void CollectItem(string itemName)
         {
-            if (itemName == ItemChoiceManager.itemsToSteal[currentItemStealing].itemName)
+            if (itemName == ItemChoiceManager.itemsToSteal[currentItemStealingIndex].itemName)
             {
                 itemsCollected++;
-                currentItemStealing++;
+                currentItemStealingIndex++;
             }
             else
             {
+                FindObjectOfType<AudioManager>().Play("LoseSound");
                 SceneManager.LoadScene(0);
+                SaveLoadSystem.ClearPrefs();
                 Debug.Log("wrong item");
             }
+        }
+
+        public void DisplayItemsLeft()
+        {
+            int itemsLeft = (currentLevel + 2) - (itemsCollected);
+            tmpUGUI.text = $"{itemsLeft} Items Left!";
         }
     }
 }

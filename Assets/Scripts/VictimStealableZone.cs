@@ -1,3 +1,4 @@
+using EasyAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,6 +15,7 @@ namespace HARROP_CHARLIE.RandomTheft
         [SerializeField] private GameObject stealSlider;
         [SerializeField] private GameObject fill;
         [SerializeField] private LevelManager levelManager;
+        [SerializeField] private AudioManager audioManager;
         private Slider slider;
 
         private void Awake()
@@ -22,13 +24,27 @@ namespace HARROP_CHARLIE.RandomTheft
             levelManager = GameObject.Find("Game Manager").GetComponent<LevelManager>();
         }
 
+        private void Start()
+        {
+            StartCoroutine(LateStart(1f));
+        }
+
+        IEnumerator LateStart(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+            audioManager = FindObjectOfType<AudioManager>();
+            audioManager.ResetPitch("Charge");
+        }
+
         private void OnTriggerStay2D(Collider2D collision)
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                if (steal.action.ReadValue<float>() == 1)
+                if (steal.action.ReadValue<float>() == 1 && slider.value != slider.maxValue)
                 {
                     Debug.Log("Steal Item");
+                    audioManager.Play("Charge");
+                    audioManager.ChangePitchUp("Charge", 0.01f);
                     slider.value += 0.015f;
                 }
             }
@@ -41,6 +57,8 @@ namespace HARROP_CHARLIE.RandomTheft
                 fill.GetComponent<Image>().color = Color.green;
                 //figure out how to check collecting in order
                 levelManager.CollectItem(transform.parent.name);
+                audioManager.ResetPitch("Charge");
+                audioManager.Play("Collect");
             }
         }
     }
